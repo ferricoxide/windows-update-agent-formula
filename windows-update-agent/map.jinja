@@ -68,7 +68,11 @@
   UseWUServer:
     vtype: REG_DWORD
 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+  InstallAtShutdown:
+    vtype: REG_DWORD
   ScanBeforeInitialLogonAllowed:
+    vtype: REG_DWORD
+  UsoDisableAADJAttribution:
     vtype: REG_DWORD
 {%- endload %}
 
