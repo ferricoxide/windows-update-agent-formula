@@ -3,6 +3,7 @@
 # Formula supports all keys under these subkeys:
 # - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate
 # - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU
+# - HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator
 
 {%- load_yaml as wua %}
 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate':
@@ -63,6 +64,9 @@
   ScheduledInstallTime:
     vtype: REG_DWORD
   UseWUServer:
+    vtype: REG_DWORD
+'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+  ScanBeforeInitialLogonAllowed:
     vtype: REG_DWORD
 {%- endload %}
 
