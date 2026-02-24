@@ -13,8 +13,12 @@ Salt formula to manage the configuration of the Windows Update Agent
 ### windows-update-agent
 
 Configure the registry entries associated with the Windows Update Agent.
-Microsoft describes the relevant registry entries in a [Technet article]
-(https://technet.microsoft.com/en-us/library/Dd939844(v=WS.10).aspx).
+* Microsoft describes the Server 2008 configuration-items' relevant registry
+entries in the [Configure Automatic Updates using Registry Editor](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd939844(v=ws.10))
+"previous versions" Microsoft Learn document.
+* Microsoft describes the Server 2016, 2019, 2022 and 2025 configuration-items'
+relevant registry entries in the [Configure Automatic Updates using Registry Editor](https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings)
+"current versions" Microsoft Learn document.
 
 
 ## Configuration
