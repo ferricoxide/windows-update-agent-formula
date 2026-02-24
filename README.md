@@ -49,11 +49,10 @@ windows-update-agent:
 
 This is a dictionary of all the registry keys and subkeys that can be
 configured by this formula. Detailed descriptions of the registry entries can
-be found in the [linked Microsoft Technet article]
-(https://technet.microsoft.com/en-us/library/Dd939844(v=WS.10).aspx). If none
-of the pillar settings have a value, by default the formula will do nothing.
-To remove undefined keys, see the configuration setting [remove-undefined-keys]
-(#windows-update-agent:remove-undefined-keys).
+be found in the previously-linked Microsoft Learn articles. If none of the
+pillar settings have a value, by default the formula will do nothing.  To
+remove undefined keys, see the configuration setting
+[remove-undefined-keys](#windows-update-agent:remove-undefined-keys).
 
 **Example -- Utilize an internal WSUS server for updates**:
 >Note the three settings below that have defined values...
