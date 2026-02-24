@@ -17,7 +17,7 @@ windows-update-agent:
 
   # Dictionary of Windows Update registry keys and values
   registry:
-    hklm-windows-update:
+    'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate':
       AcceptTrustedPublisherCerts: ''
       DisableWindowsUpdateAccess: ''
       ElevateNonAdmins: ''
@@ -25,13 +25,13 @@ windows-update-agent:
       TargetGroupEnabled: ''
       WUServer: ''
       WUStatusServer: ''
-    hkcu-explorer:
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer':
       DisableWindowsUpdateAccess: ''
-    hklm-internet-communication:
+    'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management\Internet Communication':
       NoWindowsUpdate: ''
-    hkcu-windows-update:
+    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate':
       DisableWindowsUpdateAccess: ''
-    hklm-windows-update-au:
+    'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\AU':
       AlwaysAutoRebootAtScheduledTime: ''
       AlwaysAutoRebootAtScheduledTimeMinutes: ''
       AUOptions: ''
@@ -49,3 +49,7 @@ windows-update-agent:
       ScheduledInstallDay: ''
       ScheduledInstallTime: ''
       UseWUServer: ''
+    'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+      InstallAtShutdown: ''
+      ScanBeforeInitialLogonAllowed: ''
+      UsoDisableAADJAttribution: ''
