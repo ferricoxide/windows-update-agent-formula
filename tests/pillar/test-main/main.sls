@@ -2,10 +2,11 @@
 # keys found in this technet article:
 # - https://technet.microsoft.com/en-us/library/Dd939844(v=WS.10).aspx
 # The formula supports all keys listed in that article under these subkeys:
-# - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate
 # - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
-# - HKEY_LOCAL_MACHINE\SYSTEM\Internet Communication Management\Internet Communication
 # - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\WindowsUpdate
+# - HKEY_LOCAL_MACHINE\SYSTEM\Internet Communication Management\Internet Communication
+# - HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator
+# - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate
 # - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU
 
 
@@ -46,5 +47,10 @@ windows-update-agent:
         RescheduleWaitTime: ''
         RescheduleWaitTimeEnabled: ''
         ScheduledInstallDay: ''
+        ScheduledInstallEveryWeek: ''
         ScheduledInstallTime: ''
         UseWUServer: '1'
+      'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+        InstallAtShutdown: ''
+        ScanBeforeInitialLogonAllowed: ''
+        UsoDisableAADJAttribution: ''
