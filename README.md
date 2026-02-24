@@ -90,4 +90,8 @@ windows-update-agent:
         ScheduledInstallDay: ''
         ScheduledInstallTime: ''
         UseWUServer: '1'
+      'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+        InstallAtShutdown: '1'
+        ScanBeforeInitialLogonAllowed: '1'
+        UsoDisableAADJAttribution: '0'
 ```
