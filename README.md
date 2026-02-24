@@ -13,8 +13,12 @@ Salt formula to manage the configuration of the Windows Update Agent
 ### windows-update-agent
 
 Configure the registry entries associated with the Windows Update Agent.
-Microsoft describes the relevant registry entries in a [Technet article]
-(https://technet.microsoft.com/en-us/library/Dd939844(v=WS.10).aspx).
+* Microsoft describes the Server 2008 configuration-items' relevant registry
+entries in the [Configure Automatic Updates using Registry Editor](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd939844(v=ws.10))
+"previous versions" Microsoft Learn document.
+* Microsoft describes the Server 2016, 2019, 2022 and 2025 configuration-items'
+relevant registry entries in the [Configure Automatic Updates using Registry Editor](https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings)
+"current versions" Microsoft Learn document.
 
 
 ## Configuration
@@ -45,16 +49,15 @@ windows-update-agent:
 
 This is a dictionary of all the registry keys and subkeys that can be
 configured by this formula. Detailed descriptions of the registry entries can
-be found in the [linked Microsoft Technet article]
-(https://technet.microsoft.com/en-us/library/Dd939844(v=WS.10).aspx). If none
-of the pillar settings have a value, by default the formula will do nothing.
-To remove undefined keys, see the configuration setting [remove-undefined-keys]
-(#windows-update-agent:remove-undefined-keys).
+be found in the previously-linked Microsoft Learn articles. If none of the
+pillar settings have a value, by default the formula will do nothing.  To
+remove undefined keys, see the configuration setting
+[remove-undefined-keys](#windows-update-agent:remove-undefined-keys).
 
 **Example -- Utilize an internal WSUS server for updates**:
 >Note the three settings below that have defined values...
 
-```
+```yaml
 windows-update-agent:
   lookup:
     registry:
@@ -91,3 +94,33 @@ windows-update-agent:
         ScheduledInstallTime: ''
         UseWUServer: '1'
 ```
+
+**Example -- Utilize a the public Windows Update servers for updates**:
+
+```yaml
+windows-update-agent:
+  lookup:
+    registry:
+      'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU':
+        NoAutoUpdate: '0'
+        AUOptions: '4'
+        ScheduledInstallEveryWeek: '1'
+        ScheduledInstallDay: '0'
+        ScheduledInstallTime: '0'
+        UseWUServer: '0'
+        NoAutoRebootWithLoggedOnUsers: '1'
+      'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+        InstallAtShutdown: '1'
+        ScanBeforeInitialLogonAllowed: '1'
+        UsoDisableAADJAttribution: '0'
+```
+
+In the above:
+* The `HKLM...WindowsUpdate\AU` registry key-path defines _when_ scheduled updates are done:
+    * Use of the `ScheduledInstall*` keys are enabled by setting the `AUOptions` key's value to `4`
+    * Periodic updates are enabled via the `ScheduledInstallEveryWeek` key's (boolean) value
+    * Check-runs happen daily via the `ScheduledInstallDay` key's (numeric, `0` thorugh `7`) value
+    * Check-runs happen (relative to the system's timezone) at midnight via the `ScheduledInstallTime` key's (numeric, `0` through `23`) value
+* The `HKLM...WindowsUpdate\Orchestrator` registry key-path defines when addtional, non-scheduled updates may be done:
+    * Users are prompted to install any pending updates at shutdown via the `InstallAtShutdown` key's (boolean) value
+    * Available updates are allowed to be applied before any person ever logs into the system via the `ScanBeforeInitialLogonAllowed` key's (boolean) value

@@ -3,6 +3,7 @@
 # Formula supports all keys under these subkeys:
 # - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate
 # - HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU
+# - HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator
 
 {%- load_yaml as wua %}
 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate':
@@ -30,11 +31,11 @@
   DisableWindowsUpdateAccess:
     vtype: REG_DWORD
 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU':
+  AUOptions:
+    vtype: REG_DWORD
   AlwaysAutoRebootAtScheduledTime:
     vtype: REG_DWORD
   AlwaysAutoRebootAtScheduledTimeMinutes:
-    vtype: REG_DWORD
-  AUOptions:
     vtype: REG_DWORD
   AutoInstallMinorUpdates:
     vtype: REG_DWORD
@@ -60,9 +61,18 @@
     vtype: REG_DWORD
   ScheduledInstallDay:
     vtype: REG_DWORD
+  ScheduledInstallEveryWeek:
+    vtype: REG_DWORD
   ScheduledInstallTime:
     vtype: REG_DWORD
   UseWUServer:
+    vtype: REG_DWORD
+'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
+  InstallAtShutdown:
+    vtype: REG_DWORD
+  ScanBeforeInitialLogonAllowed:
+    vtype: REG_DWORD
+  UsoDisableAADJAttribution:
     vtype: REG_DWORD
 {%- endload %}
 
