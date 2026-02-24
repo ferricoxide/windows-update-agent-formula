@@ -57,7 +57,7 @@ remove undefined keys, see the configuration setting
 **Example -- Utilize an internal WSUS server for updates**:
 >Note the three settings below that have defined values...
 
-```
+```yaml
 windows-update-agent:
   lookup:
     registry:
@@ -93,8 +93,34 @@ windows-update-agent:
         ScheduledInstallDay: ''
         ScheduledInstallTime: ''
         UseWUServer: '1'
+```
+
+**Example -- Utilize a the public Windows Update servers for updates**:
+
+```yaml
+windows-update-agent:
+  lookup:
+    registry:
+      'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU':
+        NoAutoUpdate: '0'
+        AUOptions: '4'
+        ScheduledInstallEveryWeek: '1'
+        ScheduledInstallDay: '0'
+        ScheduledInstallTime: '0'
+        UseWUServer: '0'
+        NoAutoRebootWithLoggedOnUsers: '1'
       'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator':
         InstallAtShutdown: '1'
         ScanBeforeInitialLogonAllowed: '1'
         UsoDisableAADJAttribution: '0'
 ```
+
+In the above:
+* The `HKLM...WindowsUpdate\AU` registry key-path defines _when_ scheduled updates are done:
+    * Use of the `ScheduledInstall*` keys are enabled by setting the `AUOptions` key's value to `4`
+    * Periodic updates are enabled via the `ScheduledInstallEveryWeek` key's (boolean) value
+    * Check-runs happen daily via the `ScheduledInstallDay` key's (numeric, `0` thorugh `7`) value
+    * Check-runs happen (relative to the system's timezone) at midnight via the `ScheduledInstallTime` key's (numeric, `0` through `23`) value
+* The `HKLM...WindowsUpdate\Orchestrator` registry key-path defines when addtional, non-scheduled updates may be done:
+    * Users are prompted to install any pending updates at shutdown via the `InstallAtShutdown` key's (boolean) value
+    * Available updates are allowed to be applied before any person ever logs into the system via the `ScanBeforeInitialLogonAllowed` key's (boolean) value
